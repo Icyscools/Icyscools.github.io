@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"com.icys.party.party","l":"PartyEntity"}]
