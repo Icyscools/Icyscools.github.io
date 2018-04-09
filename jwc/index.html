@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JWC</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="styles.css">
+	<link href="https://fonts.googleapis.com/css?family=Tajawal:200,300,400,500,700" rel="stylesheet">
+</head>
+<body>
+	<div class="box1-container">
+		<div class="box">
+			<strong> Checkout! </strong>
+			<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nisl nisi, interdum gravida dui eu, sodales eleifend lacus. Aliquam sed lacinia libero, sed congue nulla. Duis consequat nibh in erat cursus consequat et a ligula. Vestibulum tincidunt velit facilisis viverra pulvinar. Sed eget quam at eros ultricies pretium. Morbi id nunc pellentesque lectus vehicula lacinia. (<i>That why I need content maker</i>) </p>
+			<hr>
+			<p> Woramat Ngamkham </p>
+		</div>
+	</div>
+	<div class="box2-container">
+		<div class="box-lt">
+			<strong>Payment</strong>
+			<hr>
+			<form action="#" onsubmit="return isVaildForm(this)">
+				<div class="radio-box" style="padding-top: 12px;padding-bottom: 12px;">
+					<div class="card-type">
+						<input type="radio" name="cardtype" id="card-type-1" value="CreditCard" required>
+						<label for="card-type-1" style="cursor:pointer">Credit Card</label>
+					</div>
+					<div class="card-type">
+						<input type="radio" name="cardtype" id="card-type-2" value="DebitCard" required>
+						<label for="card-type-2" style="cursor:pointer">Debit Card</label>
+					</div>
+					<div class="card-type">
+						<input type="radio" name="cardtype" id="card-type-3" value="Paypal" required>
+						<label for="card-type-3" style="cursor:pointer">Paypal</label>
+					</div>
+				</div>
+				<hr>
+				<p style="padding-top: 6px;margin-bottom: 4px;">Name on Card</p>
+				<input type="text" name="cardname" placeholder="Name on Card" required>
+				<p style="padding-top: 6px;margin-bottom: 4px;">Credit card Number</p>
+				<input type="text" name="cardno" max="16" placeholder="Credit card No." required>
+				<div style="padding-top: 18px;margin-bottom: 6px">
+					<input type="hidden" name="itemId">
+					<input type="submit" value="Continue">
+				</div>
+			</form>
+		</div>
+		<div class="box-rt">
+			<div class="item" onclick="foc(this, 2, 1);">
+				<div class="item-text">
+					<div class="item-name">Idea</div>
+					<div class="item-desc">A thought or suggestion... but it not for sale.</div>
+				</div>
+				<div class="item-price">
+					<span>NaN฿</span>
+				</div>
+			</div>
+			<div class="item" onclick="foc(this, 1, 2);">
+				<div class="item-text">
+					<div class="item-name">Tablet</div>
+					<div class="item-desc">A portable personal computer with 8.4" LCD screen and a lot of battery capacity.</div>
+				</div>
+				<div class="item-price">
+					<span>12,800฿</span>
+				</div>
+			</div>
+			<div class="item" onclick="foc(this, 1, 3);">
+				<div class="item-text">
+					<div class="item-name">Planner</div>
+					<div class="item-desc">A chart for recording future appointments, tasks, goals, etc.</div>
+				</div>
+				<div class="item-price">
+					<span>150฿</span>
+				</div>
+			</div>
+			<div class="item" onclick="foc(this, 1, 4);">
+				<div class="item-text">
+					<div class="item-name">Notebook</div>
+					<div class="item-desc">A book of plain paper or paper with lines, for writing on.</div>
+				</div>
+				<div class="item-price">
+					<span>80฿</span>
+				</div>
+			</div>
+			<div class="item" onclick="foc(this, 1, 5);">
+				<div class="item-text">
+					<div class="item-name">Pen</div>
+					<div class="item-desc">An instrument for writing or drawing with ink.</div>
+				</div>
+				<div class="item-price">
+					<span>20฿</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="script.js"></script>
+</body>
+</html>
