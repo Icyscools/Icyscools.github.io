@@ -1,2 +1,2 @@
 # Icyscools.github.io
-This is javadoc website for party plugin
+This is website host by github
