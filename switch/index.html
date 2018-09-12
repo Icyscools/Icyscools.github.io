@@ -1,0 +1,75 @@
+<html>
+<head>
+	<title>โคมไฟ</title>
+	<meta charset="utf-8">
+</head>
+<style>
+	body {
+		background-color: #1F1F1F;
+		color: #F9F9F9;
+		height: 100vh;
+		cursor: pointer;
+	}
+	#debug {
+		pointer-events: none;
+	}
+</style>
+<body onclick="turnswitch()">
+	<div id="debug">
+		<span id="init"></span><br>
+		<span id="final"></span><br>
+		<span id="state"></span><br>
+		<span id="total"></span>
+	</div>
+	<script>
+		var init_time = 0
+		var final_time = 0
+		var total_warm = 0
+		var state = "CLOSE"
+		var last_state = "COOL"
+
+		function turnswitch() {
+			if(init_time == 0) {
+				init_time = new Date()
+				state = "COOL"
+			} else {
+				final_time = new Date()
+				if(state != "CLOSE") {
+					state = "CLOSE"
+				} else if(final_time - init_time <= 6000 && last_state == "COOL") {
+					state = "WARM"
+					last_state = "WARM"
+					total_warm += 1
+				} else {
+					state = "COOL"
+					last_state = "COOL"
+				}
+				document.getElementById("init").innerHTML = "Initial time : " + ("0" + init_time.getHours()).slice(-2) + ":" + ("0" + init_time.getMinutes()).slice(-2) + ":" + ("0" + init_time.getSeconds()).slice(-2) + ":" + init_time.getMilliseconds()
+				document.getElementById("final").innerHTML = "Final time : " + ("0" + final_time.getHours()).slice(-2) + ":" + ("0" + final_time.getMinutes()).slice(-2) + ":" + ("0" + final_time.getSeconds()).slice(-2) + ":" + final_time.getMilliseconds()
+				document.getElementById("state").innerHTML = "Current state : " + state
+				document.getElementById("total").innerHTML = "Total warm = " + total_warm
+				init_time = final_time
+			}
+
+			light(state)
+		}
+
+		function light(state) {
+			switch(state) {
+				case "CLOSE":
+					document.body.style.backgroundColor = "#1F1F1F"
+					document.body.style.color = "#F9F9F9"
+					break
+				case "COOL":
+					document.body.style.backgroundColor = "#EBF1FF"
+					document.body.style.color = "#1F1F1F"
+					break
+				case "WARM":
+					document.body.style.backgroundColor = "#FF4F00"
+					document.body.style.color = "#1F1F1F"
+					break
+			}
+		}
+	</script>
+</body>
+</html>
