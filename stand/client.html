@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<head>
+	<title>Client</title>
+	<meta charset="utf-8">
+</head>
+<style id="theColor">
+	* {
+		margin: 0;
+		padding: 0;
+	}
+
+	body {
+		background: #000;
+		background-size: cover;
+	}
+
+	.overlay {
+		position: absolute;
+		background: #000;
+		background-size: cover;
+		width: 100vw;
+		height: 100vh;
+	}
+
+	.faded {
+		transition: opacity;
+	}
+</style>
+<body>
+	<div class="overlay" id="bg" color="black">
+	</div>
+
+	<script id="color" src="p3-color.json"></script>
+	<script>
+		var id = 0;
+		var scene = localStorage.getItem('scenelog') ? JSON.parse(localStorage.getItem('scenelog')) : [];
+		var frame = 0;
+		var id = prompt("ID ?", 0);
+
+		for (c in color) {
+			theColor.innerHTML += `.overlay[color="${c}"]{
+				background: ${color[c]};
+				background-size: inherit;
+				color: black;
+			}`;
+		}
+
+		function playAllScene(startFrame) {
+			frame = startFrame;
+			setTimeout(function () {
+				playScene(frame++);
+				if (frame < scene.length) {
+					playAllScene(frame);
+				}
+			}, 500);
+		}
+
+		function playLoop(startFrame, options) {
+			let loop = options.loop !== undefined ? options.loop : 1; // Amount of loop
+			let delay = options.delay !== undefined ? options.delay : 500; // Delay per  frame in ms.
+			var length = scene.length * loop;
+			frame = startFrame;
+			
+			var thatLoop = setInterval(function () {
+				playScene(frame++ % scene.length)
+				console.log(length--)
+				if(length <= 0) {
+					window.clearInterval(thatLoop);
+				}
+			}, delay);
+		}
+
+		function fadeScene(startFrame, toFrame, options) {
+			let delay = options.delay !== undefined ? options.delay : 500; // Delay before change frame
+			var element = document.querySelector("#bg");
+			frame = startFrame;
+			playScene(frame);
+			
+			element.classList.add("faded");
+			element.style.opacity = "0";
+			var thatLoop = setTimeout(function () {
+				playScene(toFrame);
+				element.style.opacity = "1";
+			}, delay);
+		}
+
+		function playScene(frame) {
+			var element = document.querySelector(".overlay");
+			element.setAttribute("color", scene[frame][id]);
+			console.log(frame, id, scene[frame][id])
+		}
+
+		function setColor(color) {
+			let element = document.querySelector("#bg");
+			element.setAttribute("color", color);
+		}
+
+		function findGetParameter(parameterName) {
+		    var result = null,
+		        tmp = [];
+		    location.search
+		        .substr(1)
+		        .split("&")
+		        .forEach(function (item) {
+		          tmp = item.split("=");
+		          if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+		        });
+		    return result;
+		}
+	</script>
+</body>
